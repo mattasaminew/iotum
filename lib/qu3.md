@@ -1,0 +1,22 @@
+## Question
+```
+Determine range of possible values for a
+
+x = random_int(1,6)
+y = random_int(1,6)
+z = random_int(1,6)
+a = x + y + z
+```
+
+## Answer
+```
+Min(a) = Min(x) + Min(y) + Min(z)
+Min(a) = 1 + 1 + 1
+Min(a) = 3
+
+Max(a) = Max(x) + Max(y) + Max(z)
+Max(a) = 6 + 6 + 6
+Max(a) = 18
+
+Therefore, Range(a) = [3, 18]
+```
