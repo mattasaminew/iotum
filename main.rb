@@ -17,6 +17,6 @@ puts "\n"
 puts "===== Question 4 ====="
 execute_qu_4
 
-# puts "\n"
-# puts "===== Question 5 ====="
-# puts File.read("./lib/qu5.txt")
+puts "\n"
+puts "===== Question 5 ====="
+puts File.read("./lib/qu5.txt")

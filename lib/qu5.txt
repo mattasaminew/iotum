@@ -1,0 +1,42 @@
+Chat Application
+
+When considering the system of a chat application, there are a few key entities in our system:
+
+  - User:     A specific user of the application. In a more advanced application, this use may be
+              authenticated with a password, or use OAuth to associate to another profile. However, 
+              for simplicity of this discussion, let us assume that a user simply has a unique name
+
+  - Message:  A specific message that a user sends in the app. Every message would have some text 
+              and would associated to a specific user
+
+  - Room:     A specific chat. In a peer-based chat app, this might be a conversation between two users. 
+              In a more community-oriented chat app, this might be a topic-based chat. Either way, a room 
+              represents a group of associated messages. Every message would belong to a user and a room.
+
+At the most basic level, this chat app can consist of a basic CRUD application with 3 simple models.
+However, when considering the user experience of a chat application, there are a few design considerations
+expected when using such an app:
+
+  - The messages should persist (if I close the application, I should see my old messages when returning)
+  - The page shouldn't reload constantly
+  - The messages should appear in the client right away, without the need for reloading
+
+Achieving instant updating of messages with regular HTTP methods in our chat client would require constant
+polling of the server, which is not ideal. To avoid this, I would recommend using WebSockets, which allow
+for a constant connection with bi-directional communication. This means by using WebSockets, we can send a
+message to the server and immediately update anyone else connected. To avoid constantly reloading the page,
+we can render the data from our chat on the client-side (possibly a single-page app), with a modern client 
+side library (React for example, but regular JS would suffice).
+
+With this context, our chat would be composed of a server and a client:
+
+  - Server: Any stack that supports WebSockets (Rails, Node.js)
+    - CRUD of Users, Messages and Rooms
+    - Allow client to subscribe to a WebSocket based on a room
+
+  - Client: Any modern client-side framework (React)
+    - UI to create user, create or navigate to different rooms (available rooms provided from server)
+    - When entering a room, the client can retrieve all previous messages in the room from the server and
+      subscribe to the room's socket, allowing it to receive all new messages in the room. 
+    - As new messages are sent, they are broadcast to the socket subscribers and persisted on the server 
+      (database). As new messages are received, they are appended to the chat on the client side.
