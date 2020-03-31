@@ -9,3 +9,11 @@ def get_output_value(number)
 
   text
 end
+
+def execute_qu_1
+  num = 1
+  while num <= 100
+    puts get_output_value(num)
+    num += 1
+  end
+end

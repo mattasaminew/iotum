@@ -7,3 +7,10 @@ def remove_duplicates(array)
 
   hash.keys
 end
+
+def execute_qu_4
+  words = ['one', 'one', 'two', 'three', 'three', 'two']
+
+  puts "Given words = #{words}"
+  puts "remove_duplicates(words) = #{remove_duplicates(words)}"
+end
